@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">{{price >= 100 ? '真贵':'还行'}}
+        <div v-text="price"></div>
+        <div v-text="dida" v-show="flag"></div>
+        <div v-text="dida" v-if="flag"></div>
+        <div v-text="dida" v-else-if="false"></div>
+        <div v-else>heihei</div>
+        <button v-on:click="price--">-</button>
+        <button @click.once="price++">+</button>
+        <button @click="fn">fn</button>
+        <button @click="ft(8,$event)">ft</button>
+        <!-- <img :src="src" alt=""> -->
+        <div v-text="people"></div>
+        <div v-for="(item, index) in list">{{item}}</div>
+        <div v-for="(value,key,index) in people">{{value}}</div>
+        <div v-for="item in 10" :key="item">{{item}}</div>
+
+        <ul>
+            <li v-for="(item, index) in peoples" :key="item.age">
+                <span>{{item.name}}</span>
+                <span>{{item.age}}</span>
+                <button @click="drop(item.age)">删除</button>
+            </li>
+        </ul>
+        <div>username：<input type="text" v-model="username"> <button @click="outData">打印</button></div>
+
+        <div class="box" :class="classList"></div>
+    </div>
+
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                price: 1000,
+                dida: "dida",
+                flag: false,
+                src: "./imgs/10-02.png",
+                people: { name: 'mike', age: 90 },
+                list: ["西瓜", "苹果", "鸭梨"],
+                peoples: [{ name: 'mike', age: 90 }, { name: 'mike', age: 85 }, { name: 'mike', age: 80 }],
+                username: "mike",
+                classList: { box2: true, box3: false }
+            },
+            methods: {
+                fn(e) {
+                    console.log(e.target);
+                },
+                ft(num, event) {
+                    console.log(event.target);
+                    this.price -= num
+                    console.log(num);
+                },
+                drop(id) {
+                    console.log(id);
+                },
+                outData() {
+                    console.log(this.username);
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
